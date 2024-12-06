@@ -1,0 +1,15 @@
+
+Note: I have neglected the implementation of DPDK for time and also I had to installed dependencies in my machine for implementation. I didn't want to mess my system up now. I also could have architected in a more readable as well as structured way. I also should have established a better Error handling way using `anyhow` crate.
+
+ - I had the option to use different runtime executors provided by crates like tokio and futures but didn't used them because they will run their scheduling algorithms upon the OS's scheduler which has multiple down sides. Firstly it will run it's own scheduler upon Operating Systems scheduler which will make the executions slower. Secondly they assign less numbers of threads for asynchronous functions and assigns more threads in blocking I/O operations.
+
+
+ - I could have implemented WebSocket for receiving Data from client but the challenge is that it would not be as fast as UDP Connection which only lacks in the guarantee it provides for data transmission. I have the only other stable option to implement WebSocket like protocol in our application layer on the UDP Connection itself. Assuming that in local development purpose it will not loose data, I have decided to implement UDP. I have other option like using QUIC which would create multiple streams for data transmission and will also provide the guarantee of data. I am ignoring the QUIC as it would be very new thing for me to implement. As it is an assignment I am neglecting that time consumption thing.
+
+
+ - I could have implemented DPDK along with this io_uring for more faster packet processing.
+
+
+ - I would have preferred to implement raw TcpStream from mio or tokio for faster websocket handling along with io_uring. I also have the option of DPDK.
+
+ - I have constructed two variables to store all the transactions by `public_key` and the latest processed `nonce` for any particular wallet address.
